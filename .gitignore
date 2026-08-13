@@ -1,0 +1,7 @@
+## Visual Studio / User Specific Files
+.vs/
+.vscode/
+
+## Build / Output Directories
+[Bb]in/
+[Ob]bj/
