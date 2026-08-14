@@ -62,7 +62,7 @@ class Program
                         decimal media = (notas1[i] + notas2[i]) / 2;
                         Console.WriteLine($"Nome: {nomes[i]} " +
                                           $"Idade: {idades[i]} " +
-                                          $"Média: {media:F1}");
+                                          $"Média: {media}");
                     }
                     break;
                 case 2:
