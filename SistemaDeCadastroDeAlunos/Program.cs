@@ -17,8 +17,14 @@ class Program
 
         for (alunos = 0; alunos < 10; alunos++)
         {
-
-
+            Console.WriteLine($"Aluno {alunos + 1}");
+            nomes[alunos] = (Console.ReadLine() ?? "").Trim().ToUpper();
+            while (nomes[alunos] == "")
+            {
+                Console.Write("Nome obrigatório. Digite novamente: ");
+                nomes[alunos] = (Console.ReadLine() ?? "").Trim().ToUpper();
+                }
+            
             Console.WriteLine("Idade: ");
             while (!int.TryParse(Console.ReadLine(), out idades[alunos]) || idades[alunos] <= 0) // Pergunta ate o usuario dar uma idade valida
             {
@@ -36,9 +42,9 @@ class Program
             {
                 Console.WriteLine("Deseja cadastrar outro aluno? (S/N): ");
 
-                string resposta = Console.ReadLine().ToLower();
+                string resposta = Console.ReadLine().Trim().ToUpper();
 
-                if (resposta != "s")
+                if (resposta != "S")
                 {
                     alunos++; //Quando o break é executado, o incremento normal do for não acontece:
                     break; //menu principal
@@ -60,9 +66,7 @@ class Program
                     for (int i = 0; i < alunos; i++)
                     {
                         decimal media = (notas1[i] + notas2[i]) / 2;
-                        Console.WriteLine($"Nome: {nomes[i]} " +
-                                          $"Idade: {idades[i]} " +
-                                          $"Média: {media}");
+                        Console.WriteLine($"Nome: {nomes[i]} " + $"Idade: {idades[i]} " + $"Média: {media}");
                     }
                     break;
                 case 2:
