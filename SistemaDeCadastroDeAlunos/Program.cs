@@ -76,7 +76,6 @@ class Program
                 Console.WriteLine("Opção inválida!");
                 continue;
             }
-
             switch (opcao)
             {
                 case 1:
@@ -91,29 +90,61 @@ class Program
                     }
                     break;
                 case 2:
+                    Console.WriteLine("\n--- Buscar Aluno ---");
                     Console.WriteLine("Digite o nome do aluno que deseja buscar: ");
-                    break;
-                case 3:
-                    Console.WriteLine("Exibindo alunos aprovados...");
-                    break;
-                case 4:
-                    Console.WriteLine("Exibindo média da turma...");
-                    decimal somaDasMedias = 0;
+
+                    string nomeBusca = Console.ReadLine().ToUpper().Trim();
+
+                    bool encontrado = false;
+
                     for (int i = 0; i < quantidadeAlunos; i++)
-                        somaDasMedias += medias[i];
-                    decimal mediaTurma = somaDasMedias / quantidadeAlunos;
-                    Console.WriteLine($"Média da turma: {mediaTurma:F2}");
-                    break;
-                case 0:
-                    Console.WriteLine("Encerrando o programa...");
-                    break;
-                default:
-                    Console.WriteLine("Opção inválida!");
-                    break;
-                    
+                    {
+                        if (nomes[i] == nomeBusca)
+                        {
+
+
+                            Console.WriteLine("\nAluno encontrado!");
+                            Console.WriteLine($"Nome: {nomes[i]}");
+                            Console.WriteLine($"Idade: {idades[i]}");
+                            Console.WriteLine($"Nota 1: {notas1[i]}");
+                            Console.WriteLine($"Nota 2: {notas2[i]}");
+                            Console.WriteLine($"Média: {medias[i]:F1}");
+
+                            encontrado = true;
+                            break; // Interrompe a busca assim que encontra o aluno
+                        }
+                    }
+
+                    if (!encontrado)
+                    {
+                        Console.WriteLine("\nAluno não encontrado.");
+                    }
+            
+            break;
+
+                case 3:
+                Console.WriteLine("Exibindo alunos aprovados...");
+                break;
+            case 4:
+                Console.WriteLine("Exibindo média da turma...");
+                decimal somaDasMedias = 0;
+                for (int i = 0; i < quantidadeAlunos; i++)
+                    somaDasMedias += medias[i];
+                decimal mediaTurma = somaDasMedias / quantidadeAlunos;
+                Console.WriteLine($"Média da turma: {mediaTurma:F2}");
+                break;
+            case 0:
+                Console.WriteLine("Encerrando o programa...");
+                break;
+            default:
+                Console.WriteLine("Opção inválida!");
+                break;
+
             }
 
 
         } while (opcao != 0);
+
+
     }
 }
