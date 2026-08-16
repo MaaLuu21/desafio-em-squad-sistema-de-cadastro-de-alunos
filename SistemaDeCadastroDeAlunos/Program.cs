@@ -1,11 +1,4 @@
-﻿using System;
 
-namespace SistemaDeCadastroDeAlunos;
-
-class Program
-{
-    static void Main(string[] args)
-    {
         string[] nomes = new string[10];
         int[] idades = new int[10];
         decimal[] notas1 = new decimal[10];
@@ -35,22 +28,23 @@ class Program
         {
             Console.WriteLine($"Digite o nome do aluno {i + 1}:");
             nomes[i] = Console.ReadLine().ToUpper().Trim();
+
             Console.WriteLine($"Digite a idade do aluno {i + 1}:");
-            if (!int.TryParse(Console.ReadLine(), out int idadeDigitada))
+            if (!int.TryParse(Console.ReadLine(), out int idadeDigitada) || idadeDigitada < 0 || idadeDigitada > 100)
             {
                 Console.WriteLine("Idade Inválida, digite um número inteiro");
             }
             idades[i] = idadeDigitada;
 
             Console.WriteLine($"Digite a primeira nota do aluno {i + 1}:");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal nota1Digitada))
+            if (!decimal.TryParse(Console.ReadLine(), out decimal nota1Digitada) || nota1Digitada < 0 || nota1Digitada > 100)
             {
                 Console.WriteLine("Nota inválida, digite um número válido.");
             }
             notas1[i] = nota1Digitada;
 
             Console.WriteLine($"Digite a segunda nota do aluno {i + 1}:");
-            if (!decimal.TryParse(Console.ReadLine(), out decimal nota2Digitada))
+            if (!decimal.TryParse(Console.ReadLine(), out decimal nota2Digitada) || nota2Digitada < 0 || nota2Digitada > 100)
             {
                 Console.WriteLine("Nota inválida, digite um número válido");
             }
@@ -60,6 +54,8 @@ class Program
         }
 
         int opcao;
+
+        Console.Clear();
 
         do
         {
@@ -101,8 +97,6 @@ class Program
                     {
                         if (nomes[i] == nomeBusca)
                         {
-
-
                             Console.WriteLine("\nAluno encontrado!");
                             Console.WriteLine($"Nome: {nomes[i]}");
                             Console.WriteLine($"Idade: {idades[i]}");
@@ -111,6 +105,7 @@ class Program
                             Console.WriteLine($"Média: {medias[i]:F1}");
 
                             encontrado = true;
+                            Console.ReadKey();
                             break; // Interrompe a busca assim que encontra o aluno
                         }
                     }
@@ -119,32 +114,44 @@ class Program
                     {
                         Console.WriteLine("\nAluno não encontrado.");
                     }
-            
-            break;
+                    break;
 
                 case 3:
-                Console.WriteLine("Exibindo alunos aprovados...");
-                break;
-            case 4:
-                Console.WriteLine("Exibindo média da turma...");
-                decimal somaDasMedias = 0;
-                for (int i = 0; i < quantidadeAlunos; i++)
-                    somaDasMedias += medias[i];
-                decimal mediaTurma = somaDasMedias / quantidadeAlunos;
-                Console.WriteLine($"Média da turma: {mediaTurma:F2}");
-                break;
-            case 0:
-                Console.WriteLine("Encerrando o programa...");
-                break;
-            default:
-                Console.WriteLine("Opção inválida!");
-                break;
+                    Console.WriteLine("Exibindo alunos aprovados...");
+                    int quantidadeAprovada = 0;
+
+                    Console.WriteLine("Alunos aprovados");
+
+                    for (int i = 0; i < quantidadeAlunos; i++)
+                    {
+                        if (medias[i] >= 7)
+                        {
+                            Console.WriteLine("");
+                            Console.WriteLine($"{nomes[i]} - Média {medias[i]:F2}");
+                            quantidadeAprovada++;
+                        }
+                    }
+                    Console.WriteLine("");
+                    Console.WriteLine($"Total: {quantidadeAprovada} alunos");
+                    break;
+                case 4:
+                    Console.WriteLine("Exibindo média da turma...");
+                    decimal somaDasMedias = 0;
+                    for (int i = 0; i < quantidadeAlunos; i++)
+                        somaDasMedias += medias[i];
+
+                    decimal mediaTurma = somaDasMedias / quantidadeAlunos;
+                    Console.WriteLine($"Média da turma: {mediaTurma:F2}");
+
+                    break;
+                case 0:
+                    Console.WriteLine("Encerrando o programa...");
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida!");
+                    break;
 
             }
 
 
         } while (opcao != 0);
-
-
-    }
-}
