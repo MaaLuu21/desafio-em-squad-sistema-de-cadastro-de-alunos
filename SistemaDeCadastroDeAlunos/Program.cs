@@ -10,6 +10,8 @@ class Program
         int[] idades = new int[10];
         decimal[] notas1 = new decimal[10];
         decimal[] notas2 = new decimal[10];
+        decimal[] medias = new decimal[10];
+
         int quantidadeAlunos = 0;
 
         Console.WriteLine("Bem-vindo. Vamos Cadastrar até 10 Alunos!");
@@ -53,6 +55,8 @@ class Program
                 Console.WriteLine("Nota inválida, digite um número válido");
             }
             notas2[i] = nota2Digitada;
+
+            medias[i] = (notas1[i] + notas2[i]) / 2m;
         }
 
         int opcao;
@@ -77,6 +81,14 @@ class Program
             {
                 case 1:
                     Console.WriteLine("Listando alunos...");
+                    for (int i = 0; i < quantidadeAlunos; i++)
+                    {
+                        Console.WriteLine($"ALUNO {i + 1}");
+                        Console.WriteLine($"Nome: {nomes[i]}");
+                        Console.WriteLine($"Idade: {idades[i]} anos");
+                        Console.WriteLine($"Média: {medias[i]}");
+                        Console.WriteLine();
+                    }
                     break;
                 case 2:
                     Console.WriteLine("Digite o nome do aluno que deseja buscar: ");
@@ -86,6 +98,11 @@ class Program
                     break;
                 case 4:
                     Console.WriteLine("Exibindo média da turma...");
+                    decimal somaDasMedias = 0;
+                    for (int i = 0; i < quantidadeAlunos; i++)
+                        somaDasMedias += medias[i];
+                    decimal mediaTurma = somaDasMedias / quantidadeAlunos;
+                    Console.WriteLine($"Média da turma: {mediaTurma:F2}");
                     break;
                 case 0:
                     Console.WriteLine("Encerrando o programa...");
